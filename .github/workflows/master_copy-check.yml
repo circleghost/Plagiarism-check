@@ -65,5 +65,5 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'copy-check'
-          slot-name: 'Production'
+          slot-name: ''
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EE459C26182D43B28AD99BC4EED696A8 }}
