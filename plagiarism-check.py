@@ -5,6 +5,9 @@ import torch
 import requests
 import re
 
+api_keys = st.secrets["api_keys"]
+search_engine_id = st.secrets["search_engine_id"]
+
 # 初始化BERT模型和分詞器
 tokenizer = BertTokenizer.from_pretrained('bert-base-chinese')
 model = BertModel.from_pretrained('bert-base-chinese')
