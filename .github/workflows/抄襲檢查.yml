@@ -65,5 +65,5 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: '抄襲檢查'
-          slot-name: 'Production'
+          # slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CF7E8936A195480B90AABF2274B80F56 }}
