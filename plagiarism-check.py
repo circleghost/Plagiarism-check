@@ -4,9 +4,14 @@ from sklearn.metrics.pairwise import cosine_similarity
 import torch
 import requests
 import re
+import os
 
-api_keys = st.secrets["api_keys"]
-search_engine_id = st.secrets["search_engine_id"]
+
+# 從環境變量中獲取 API keys，並將其轉換為列表
+api_keys = os.environ['API_KEYS'].split(',')
+
+# 從環境變量中獲取 search engine ID
+search_engine_id = os.environ['SEARCH_ENGINE_ID']
 
 # 初始化BERT模型和分詞器
 tokenizer = BertTokenizer.from_pretrained('bert-base-chinese')
