@@ -69,18 +69,24 @@ def search_query(query, api_keys, search_engine_id):
                     'q': query,
                     'key': key,
                     'cx': search_engine_id,  # 加入搜尋引擎ID
-                    'lr': 'lang_zh-TW',      # 指定語言為繁體中文
-                    'cr': 'countryTW',       # 指定地區為台灣
-                    'gl': 'TW'               # 指定地理位置為台灣
+                    'num': 1,
+                    # 'lr': 'lang_zh-TW',      # 指定語言為繁體中文
+                    # 'cr': 'countryTW',       # 指定地區為台灣
+                    # 'gl': 'TW'               # 指定地理位置為台灣
                 }
             )
+            print("Status code:", response.status_code)
             if response.status_code == 200:
                 results = response.json().get('items')
                 if results:
                     title = results[0]['title']
                     url = results[0]['link']
                     snippet = clean_snippet(results[0]['snippet'])
+                    # 在這裡打印snippet
+                    print("Google 返回 des:", snippet)
                     return title, url, snippet
+                else:
+                    print("No results found for the query.")
         except requests.exceptions.RequestException as e:
             continue  # 如果當前API key額度用盡，則繼續嘗試下一個key
     return None, None, None
