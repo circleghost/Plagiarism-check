@@ -22,6 +22,25 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Cache Python dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/pip
+            !~/.cache/pip/log
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Cache transformers models
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/huggingface/transformers
+          key: ${{ runner.os }}-transformers-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-transformers-
+
       - name: Create and start virtual environment
         run: |
           python -m venv venv
@@ -31,6 +50,7 @@ jobs:
         run: pip install -r requirements.txt
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
 
