@@ -18,7 +18,6 @@ tokenizer = BertTokenizer.from_pretrained('bert-base-chinese')
 model = BertModel.from_pretrained('bert-base-chinese')
 
 # 定義切割段落的函數
-@st.cache_data
 def split_paragraph(paragraph):
     # 首先根據換行符號切割段落
     paragraphs = paragraph.split('\n')
@@ -46,7 +45,6 @@ def split_paragraph(paragraph):
     return split_paragraphs
 
 # 定義移除日期和省略號的函數
-@st.cache_data
 def clean_snippet(snippet):
     # 移除日期，匹配如 "Jun 13, 2023" 的格式
     snippet = re.sub(r'\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s\d{1,2},\s\d{4}\b', '', snippet)
@@ -56,7 +54,6 @@ def clean_snippet(snippet):
 
 
 # 定義進行查詢的函數
-@st.cache_data
 def search_query(query, api_keys, search_engine_id):
     # 清理查詢
     query = re.sub(r"^\d+\.", "", query)  # 移除開頭的數字列點
