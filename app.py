@@ -130,9 +130,9 @@ if st.button('檢查文案是否抄襲'):
 
         # 遍歷文檔中的每個段落
         for paragraph in paragraphs:
-            if len(paragraph) > 50:
+            if len(paragraph) > 30:
                 checked_paragraphs_count += 1  # 更新檢查段落的計數器
-                # 截取前70個字符作為查詢條件
+                # 截取前30個字符作為查詢條件
                 query = paragraph[:70] if len(paragraph) > 70 else paragraph
 
                 # 進行查詢，確保傳遞search_engine_id
@@ -144,29 +144,24 @@ if st.button('檢查文案是否抄襲'):
                     # 計算相似度，這裡比較的是查詢條件和snippet
                     similarity = calculate_similarity(query, snippet)
                     
-                    # 僅保留相似度大於95%的內容
-                    if similarity > 95:
-                        plagiarism_detected = True  # 標記為檢測到抄襲
+                    if similarity > 97:
+                        if not plagiarism_detected:
+                            st.header("以下為抄襲段落文字")
+                            st.divider()
+                            plagiarism_detected = True
                         # 呈現結果
                         st.write('檢查段落：', paragraph)  # 顯示當前正在檢查的段落
                         st.write('Google 返回的 descrption：', snippet)  # 顯示查詢到的相似文字
                         st.markdown(f'[{title}]({url})')  # 顯示標題錨文字和URL
-                        
-                        # 顯示相似度
-                        if similarity > 97:
-                            st.markdown(f'內容相似度：{similarity}%，<span style="color:red; font-weight:bold;">疑似抄襲，請檢查！！！！！</span>', unsafe_allow_html=True)
-                        else:
-                            st.write(f'內容相似度：{similarity}%')
-                        
                         st.write('========================')  # 顯示分隔號
 
         # 如果所有段落檢查完畢且未檢測到抄襲
         if not plagiarism_detected:
             st.header('本次文字未檢查出抄襲文字')
-
+            st.divider()
         # 顯示檢查段落的總數
-        st.header(f'本次一共檢查{checked_paragraphs_count}個段落')
+        st.subheader(f'本次一共檢查{checked_paragraphs_count}個段落')
         for i, paragraph in enumerate(paragraphs, 1):
-            if len(paragraph) > 50:
+            if len(paragraph) > 30:
                 st.write(f'{i}. {paragraph}')
     st.success('檢查完成！')
