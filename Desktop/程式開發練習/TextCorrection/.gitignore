@@ -1,2 +1,61 @@
-# Private individual user cursor rules
+# 私人個人用戶cursor規則
 .cursor/rules/_*.mdc
+
+# Xcode
+## 用戶設置
+xcuserdata/
+*.xcuserstate
+
+## 相容性與版本控制
+*.moved-aside
+*.xccheckout
+.xcodeprovisioningprofiles
+*.xcscmblueprint
+
+## 構建生成
+build/
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# macOS特定文件
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# 備份文件
+*~
+*.bak
+*.swp
+*.swo
+
+# API密鑰和敏感信息
+*.pem
+*.key
+apikeys.plist
+GoogleService-Info.plist
+Keys.swift
+
+# 其他
+.env
+.idea/
+*.log
